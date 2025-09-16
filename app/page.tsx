@@ -1,7 +1,9 @@
+import Footer from "@/components/footer/Footer";
 import Header from "@/components/header/Header"
 import DrivingFootprint from "@/components/profile/driving-info/experience/DrivingFootprint/DrivingFootprint";
 import HighwayTypeDriving from "@/components/profile/driving-info/experience/HighwayTypeDriving/HighwayTypeDriving";
 import TotalHoursGauge from "@/components/profile/driving-info/experience/TotalHoursGauge/TotalHoursGauge";
+import OperationalHours from "@/components/profile/driving-info/opersational-hours/OperationalHours";
 import TabNav from "@/components/profile/driving-info/tab-nav/TabNav";
 import Filter from "@/components/profile/filter/Filter";
 import UserInfo from "@/components/profile/user-info/UserInfo";
@@ -23,7 +25,9 @@ const Page = () => {
             <DrivingFootprint />
           </div>
         </div>
+        <OperationalHours />
       </div>
+      <Footer />
     </div>
   )
 }
