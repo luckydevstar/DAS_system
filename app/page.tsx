@@ -1,4 +1,5 @@
 import Header from "@/components/header/Header"
+import DrivingFootprint from "@/components/profile/driving-info/experience/DrivingFootprint/DrivingFootprint";
 import HighwayTypeDriving from "@/components/profile/driving-info/experience/HighwayTypeDriving/HighwayTypeDriving";
 import TotalHoursGauge from "@/components/profile/driving-info/experience/TotalHoursGauge/TotalHoursGauge";
 import TabNav from "@/components/profile/driving-info/tab-nav/TabNav";
@@ -13,12 +14,13 @@ const Page = () => {
         <Filter />
         <div className="flex gap-8">
           <UserInfo />
-          <div className="flex flex-col flex-1">
+          <div className="flex flex-col flex-1 gap-8">
             <TabNav />
-            <div className="pt-6 flex gap-8">
+            <div className="flex gap-8">
               <TotalHoursGauge day={3424} night={1078} />
               <HighwayTypeDriving day={3424} night={1078} />
             </div>
+            <DrivingFootprint />
           </div>
         </div>
       </div>
