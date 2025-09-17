@@ -10,9 +10,9 @@ const Header = () => {
                 <div className="absolute left-1/2 top-0 transform -translate-x-1/2">
                     <Image className="" width={210} height={210} alt="logo" src="/images/logo.png" />
                 </div>
-                <Button variant="outline" className="h-10 w-[76px] border border-black">
-                    <Settings size={32} />
-                </Button>
+                <div className="px-4 py-1.5 border border-black/50 rounded-md cursor-pointer hover:bg-black/5">
+                    <Settings size={24} />
+                </div>
             </div>
             <div className="h-[160px] bg-[#76A0B5]"></div>
         </div>

@@ -22,6 +22,7 @@ type RowNode = {
     iconSrc?: string;
     values: Record<ColKey, number>;
     child?: RowNode[];
+    iconSize?: number;
 };
 
 // ---------- initial data (with icons) ----------
@@ -35,19 +36,19 @@ const DATA: RowNode[] = [
             {
                 id: 'c1-mercedes',
                 category: 'Mercedes',
-                iconSrc: '/images/nav/truck.png',
+                iconSrc: '/images/nav/mercedes.png',
                 values: { total_hours: 235.5, night_driving: 80, day_driving: 155.5, motorway: 145.5, aroad: 36, broad: 54 },
                 child: [
                     {
                         id: 'c1-mercedes-atego816',
                         category: 'Atego 816',
-                        iconSrc: '/images/nav/truck.png',
+                        iconSrc: '',
                         values: { total_hours: 123.75, night_driving: 60.5, day_driving: 63.25, motorway: 60.5, aroad: 15, broad: 48.25 },
                     },
                     {
                         id: 'c1-mercedes-2013gf62',
                         category: 'Mercedes Atego 816 7.5-tonne curtainsider 2013 GF62 NLN',
-                        iconSrc: '/images/nav/truck.png',
+                        iconSrc: '',
                         values: { total_hours: 54.25, night_driving: 19.5, day_driving: 34.75, motorway: 28, aroad: 12.25, broad: 14 },
                     },
                 ],
@@ -55,13 +56,13 @@ const DATA: RowNode[] = [
             {
                 id: 'c1-volvo',
                 category: 'VOLVO',
-                iconSrc: '/images/nav/truck.png',
+                iconSrc: '/images/nav/volvo.png',
                 values: { total_hours: 123.75, night_driving: 45.25, day_driving: 78.5, motorway: 82, aroad: 15, broad: 26.75 },
             },
             {
                 id: 'c1-iveco',
                 category: 'IVECO',
-                iconSrc: '/images/nav/truck.png',
+                iconSrc: '/images/nav/iveco.png',
                 values: { total_hours: 54.25, night_driving: 7.25, day_driving: 47, motorway: 16.25, aroad: 17, broad: 21 },
             },
         ],
@@ -89,16 +90,16 @@ const COLS: { key: ColKey; label: string }[] = [
     { key: 'broad', label: 'B Road' },
 ];
 
-const VEHICLE_TABS: { id: string; label: string; icon?: string }[] = [
-    { id: 'motorcycle', label: 'Motorcycle', icon: '/images/nav/motorcycle.png' },
-    { id: 'car', label: 'Car', icon: '/images/nav/car.png' },
-    { id: 'delivery-truck', label: 'Delivery', icon: '/images/nav/delivery-truck.png' },
-    { id: 'minibus', label: 'Minibus', icon: '/images/nav/minibus.png' },
-    { id: 'motor-home', label: 'Motor-home', icon: '/images/nav/motor-home.png' },
-    { id: 'truck', label: 'Truck', icon: '/images/nav/truck.png' },
-    { id: 'lorry', label: 'Lorry', icon: '/images/nav/lorry.png' },
-    { id: 'double-lorry', label: 'Double', icon: '/images/nav/double-lorry.png' },
-    { id: 'tracktor', label: 'Tractor', icon: '/images/nav/tracktor.png' }, // matches your file name
+const VEHICLE_TABS: { id: string; label: string; icon?: string, width: number }[] = [
+    { width: 30, id: 'motorcycle', label: 'Motorcycle', icon: '/images/nav/motorcycle.png' },
+    { width: 30, id: 'car', label: 'Car', icon: '/images/nav/car.png' },
+    { width: 26, id: 'delivery-truck', label: 'Delivery', icon: '/images/nav/delivery-truck.png' },
+    { width: 30, id: 'minibus', label: 'Minibus', icon: '/images/nav/minibus.png' },
+    { width: 24, id: 'motor-home', label: 'Motor-home', icon: '/images/nav/motor-home.png' },
+    { width: 30, id: 'truck', label: 'Truck', icon: '/images/nav/truck.png' },
+    { width: 30, id: 'lorry', label: 'Lorry', icon: '/images/nav/lorry.png' },
+    { width: 36, id: 'double-lorry', label: 'Double', icon: '/images/nav/double-lorry.png' },
+    { width: 24, id: 'tracktor', label: 'Tractor', icon: '/images/nav/tracktor.png' }, // matches your file name
 ];
 
 
@@ -147,14 +148,17 @@ export default function OperationalHoursLegacy() {
             <div className="flex justify-between items-center my-6">
                 <h4 className="text-lg font-bold">Breakdown of Operational Hours</h4>
                 <div className="flex items-center justify-end gap-6">
-                    <Button variant="outline" className="text-xs h-8 cursor-pointer">
-                        All
-                    </Button>
+                    <div className='relative'>
+                        <Button variant="outline" className="text-xs h-6 cursor-pointer">
+                            All
+                        </Button>
+                        <div className='border-b-3 border-black/80 absolute -bottom-3 w-full' />
+                    </div>
                     {
                         VEHICLE_TABS.map((item) => {
                             return (
                                 <div className="cursor-pointer" key={item.id}>
-                                    <img src={item.icon} className="h-6 w-auto" />
+                                    <img src={item.icon} className="h-6 w-auto" style={{ width: item.width, height: 'auto' }} />
                                 </div>
                             )
                         })
@@ -204,8 +208,8 @@ export default function OperationalHoursLegacy() {
                                                 <Image
                                                     src={node.iconSrc}
                                                     alt=""
-                                                    width={20}
-                                                    height={20}
+                                                    width={node.iconSize ?? 20}
+                                                    height={node.iconSize ?? 20}
                                                     className="opacity-90"
                                                 />
                                             )}

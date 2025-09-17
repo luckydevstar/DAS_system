@@ -100,8 +100,13 @@ export default function HighwayTypeDriving({ day: _day, night: _night, title = "
         <div className="rounded-2xl shadow-sm p-6 bg-white flex-1 h-[460px]">
             <div className="text-2xl mt-4 font-bold mb-6">{title}</div>
 
-            <div className="relative w-full h-[360px] overflow-hidden -mt-6">
-                <ReactApexChart options={options} series={series} type="bar" width="100%" height="100%" />
+            <div className="flex items-stretch">
+                <div className="pr-3 flex items-center">
+                    <span className="text-xs text-black font-bold">Hrs</span>
+                </div>
+                <div className="relative w-full h-[360px] overflow-hidden -mt-6">
+                    <ReactApexChart options={options} series={series} type="bar" width="100%" height="100%" />
+                </div>
             </div>
         </div>
     );

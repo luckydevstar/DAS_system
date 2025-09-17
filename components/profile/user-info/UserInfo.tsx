@@ -66,40 +66,40 @@ const UserInfo = () => {
                         <h4 className="text-sm font-bold">Diver CPC Status</h4>
                         <ul className="flex flex-col gap-2">
                             <li>
-                                <span className="text-sm font-semibold mr-1">Driver Name:</span>
+                                <span className="text-sm font-bold mr-1">Driver Name:</span>
                                 <span>{USER_INFO.cpcStatus.name}</span>
                             </li>
                             <li>
-                                <span className="text-sm font-semibold mr-1">Licence Number:</span>
+                                <span className="text-sm font-bold mr-1">Licence Number:</span>
                                 <span>{USER_INFO.cpcStatus.licenceMumber}</span>
                             </li>
                             <li>
-                                <span className="text-sm font-semibold mr-1">Driver CPC Card Number:</span>
+                                <span className="text-sm font-bold mr-1">Driver CPC Card Number:</span>
                                 <span>{USER_INFO.cpcStatus.cardNumber}</span>
                             </li>
                         </ul>
                         <div className="flex items-center gap-1">
-                            <span className="text-sm font-semibold">Status:</span>
+                            <span className="text-sm font-bold">Status:</span>
                             <span>{USER_INFO.cpcStatus.status}</span>
                         </div>
                         <div className="flex items-center gap-1">
-                            <span className="text-sm font-semibold">Card Expiry Date:</span>
+                            <span className="text-sm font-bold">Card Expiry Date:</span>
                             <span>{USER_INFO.cpcStatus.expiryDate}</span>
                         </div>
                         <div className="flex items-center gap-1">
-                            <span className="text-sm font-semibold">Training Hours Completed:</span>
+                            <span className="text-sm font-bold">Training Hours Completed:</span>
                             <span>{USER_INFO.cpcStatus.trainingHoursCompleted}</span>
                         </div>
                         <div className="flex items-center gap-1">
-                            <span className="text-sm font-semibold">Modules Completed:</span>
+                            <span className="text-sm font-bold">Modules Completed:</span>
                             <span>{USER_INFO.cpcStatus.modulesCompleted}</span>
                         </div>
                         <div className="flex items-center gap-1">
-                            <span className="text-sm font-semibold">Training Period:</span>
+                            <span className="text-sm font-bold">Training Period:</span>
                             <span>{USER_INFO.cpcStatus.trainingPeriod}</span>
                         </div>
                         <div className="flex items-center gap-1">
-                            <span className="text-sm font-semibold">Next Renewel Due:</span>
+                            <span className="text-sm font-bold">Next Renewel Due:</span>
                             <span>{USER_INFO.cpcStatus.nextRenewalDue}</span>
                         </div>
                     </div>
