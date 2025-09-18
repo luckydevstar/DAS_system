@@ -61,7 +61,7 @@ const UserInfo = () => {
                     </div>
                 </div>
                 <div className="w-full flex flex-col gap-6">
-                    <img src={"/images/das-card.png"} className="w-full h-auto" />
+                    <img src={"/images/das-card.png"} className="w-full h-auto transform -scale-x-100" />
                     <div className="flex flex-col gap-2">
                         <h4 className="text-sm font-bold">Diver CPC Status</h4>
                         <ul className="flex flex-col gap-2">
@@ -75,7 +75,8 @@ const UserInfo = () => {
                             </li>
                             <li>
                                 <span className="text-sm font-bold mr-1">Driver CPC Card Number:</span>
-                                <span>{USER_INFO.cpcStatus.cardNumber}</span>
+                                <br />
+                                <span className="block text-right">{USER_INFO.cpcStatus.cardNumber}</span>
                             </li>
                         </ul>
                         <div className="flex items-center gap-1">
