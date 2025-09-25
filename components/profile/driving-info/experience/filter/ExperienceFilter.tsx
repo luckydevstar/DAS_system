@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuTrigger, DropdownMenuItem, DropdownMenuLabel } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 
-const Filter = () => {
+const ExperienceFilter = () => {
     return (
         <div className="flex justify-end gap-3 w-full">
             <DropdownMenu>
@@ -34,4 +34,4 @@ const Filter = () => {
     )
 }
 
-export default Filter;
+export default ExperienceFilter;
