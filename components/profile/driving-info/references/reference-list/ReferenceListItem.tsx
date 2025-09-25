@@ -9,6 +9,7 @@ export type ReferenceListItemType = {
     website: string;
     address: string;
     intro: string;
+    videoUrl: string;
 }
 
 const ReferenceListItem = (item: ReferenceListItemType) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Repeat2, Play, Volume2, Mail } from "lucide-react";
 import { ReferenceListItemType } from "./ReferenceListItem";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,7 @@ export default function ReferenceCard({
     website,
     address,
     intro,
+    videoUrl,
 }: ReferenceListItemType) {
     const [flipped, setFlipped] = useState(false);
 
@@ -100,54 +101,57 @@ export default function ReferenceCard({
 
                     {/* BACK */}
                     <section className="absolute inset-0 rounded-2xl overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)] h-full">
-                        <div className="flex flex-col h-full">
-                            <div className="flex-1 relative">
-                                <div className="h-full w-full">
-                                    <img src={photoUrl} className="w-full h-full object-cover" />
-                                </div>
-                                <button
-                                    type="button"
-                                    onClick={() => setFlipped(false)}
-                                    className="absolute top-3 right-3 h-8 w-8 inline-flex items-center gap-1 rounded-full bg-black/40 justify-center text-xs font-medium shadow hover:bg-black/50 text-white cursor-pointer"
-                                    aria-label="Flip"
-                                >
-                                    <Repeat2 size={14} />
-                                </button>
+                        <div className="flex flex-col h-full relative">
+                            <button
+                                type="button"
+                                onClick={() => setFlipped(false)}
+                                className="z-10 absolute top-3 right-3 h-8 w-8 inline-flex items-center gap-1 rounded-full bg-black/40 justify-center text-xs font-medium shadow hover:bg-black/50 text-white cursor-pointer"
+                                aria-label="Flip"
+                            >
+                                <Repeat2 size={14} />
+                            </button>
+                            {
+                                videoUrl &&
+                                <Fragment>
 
-                                {/* Floating media buttons */}
-                                <button
-                                    type="button"
-                                    className="absolute bottom-14 right-3 h-8 w-8 inline-flex items-center gap-1 rounded-full bg-black/40 justify-center text-xs font-medium shadow hover:bg-black/50 text-white cursor-pointer"
-                                    aria-label="Play"
-                                >
-                                    <Play size={14} />
-                                </button>
-                                <button
-                                    type="button"
-                                    className="absolute bottom-3 right-3 h-8 w-8 inline-flex items-center gap-1 rounded-full bg-black/40 justify-center text-xs font-medium shadow hover:bg-black/50 text-white cursor-pointer"
-                                    aria-label="Volume"
-                                >
-                                    <Volume2 size={14} />
-                                </button>
-                            </div>
+                                    <div className="flex relative">
+                                        <div className="h-full w-full">
+                                            <img src={videoUrl} className="w-full h-full object-cover" />
+                                        </div>
 
+                                        {/* Floating media buttons */}
+                                        <button
+                                            type="button"
+                                            className="absolute bottom-14 right-3 h-8 w-8 inline-flex items-center gap-1 rounded-full bg-black/40 justify-center text-xs font-medium shadow hover:bg-black/50 text-white cursor-pointer"
+                                            aria-label="Play"
+                                        >
+                                            <Play size={14} />
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="absolute bottom-3 right-3 h-8 w-8 inline-flex items-center gap-1 rounded-full bg-black/40 justify-center text-xs font-medium shadow hover:bg-black/50 text-white cursor-pointer"
+                                            aria-label="Volume"
+                                        >
+                                            <Volume2 size={14} />
+                                        </button>
+                                    </div>
+                                </Fragment>
+                            }
                             {/* Bottom panel (group for hover) */}
-                            <div className="p-5 bg-white group h-64 flex flex-col">
+                            <div className="p-5 bg-white group flex-1 flex flex-col relative" style={{ height: !!videoUrl ? 256 : '100%' }}>
                                 <div className="flex justify-between">
                                     <div className="flex flex-col">
                                         <h3 className="text-[#191919] text-xl font-bold">{name}</h3>
-                                        <h3 className="text-[#00000080] text-lg font-semibold">{title}</h3>
+                                        <h3 className="text-[#00000080] text-base font-semibold">{title}</h3>
                                     </div>
-                                    <span className="text-xs text-[#00000080] font-semibold">
+                                    <span className="text-xs text-[#00000080] font-semibold absolute right-12 top-7">
                                         {date}
                                     </span>
                                 </div>
 
                                 {/* Smooth hover expand using grid-rows */}
                                 <div className="mt-2 flex-1 overflow-auto">
-                                    <div className="h-full text-sm">
-                                        {intro}
-                                    </div>
+                                    <div className="h-full text-sm" dangerouslySetInnerHTML={{__html: intro}} />
                                 </div>
                             </div>
                             {/* /Bottom panel */}
