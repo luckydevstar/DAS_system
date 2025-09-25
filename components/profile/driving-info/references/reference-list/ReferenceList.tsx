@@ -6,7 +6,7 @@ const referenceList = [
         title: "Long-Haul (HGV) Driver",
         date: "19 May 2024",
         photoUrl: "/images/users/john_miller.JPG",
-        videoUrl: "",
+        videoUrl: "/images/users/john_miller_video.JPG",
         companyLogoUrl: "/images/logos/asda_logo.jpg",
         website: "https://Asda.com",
         address: "Asda House, South Bank, Great Wilson Street, Leeds, LS11 5AD",
@@ -33,7 +33,7 @@ const referenceList = [
         title: "Tanker Driver",
         date: "18 Aug 2024",
         photoUrl: "/images/users/tim_lewis.jpg",
-        videoUrl: "",
+        videoUrl: "/images/users/tim_lewis_video.jpg",
         companyLogoUrl: "/images/logos/royal_mail_logo.png",
         website: "https://royalmail.com",
         address: "185 Farringdon Rd London, eng EC1A 1AA",
@@ -91,10 +91,14 @@ const referenceList = [
 ]
 
 const ReferenceList = () => {
+    const sortedList = [...referenceList].sort((a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime()
+    });
+
     return (
         <div className="grid grid-cols-3 gap-2">
             {
-                referenceList.map((item, idx) => {
+                sortedList.map((item, idx) => {
                     return (
                         <ReferenceListItem {...item} key={idx} />
                     )

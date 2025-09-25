@@ -44,6 +44,25 @@ export default function ReferenceCard({
                                 >
                                     <Repeat2 size={14} />
                                 </button>
+                                {
+                                    videoUrl &&
+                                    <Fragment>
+                                        <button
+                                            type="button"
+                                            className="absolute bottom-14 right-3 h-8 w-8 inline-flex items-center gap-1 rounded-full bg-black/40 justify-center text-xs font-medium shadow hover:bg-black/50 text-white cursor-pointer"
+                                            aria-label="Play"
+                                        >
+                                            <Play size={14} />
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="absolute bottom-3 right-3 h-8 w-8 inline-flex items-center gap-1 rounded-full bg-black/40 justify-center text-xs font-medium shadow hover:bg-black/50 text-white cursor-pointer"
+                                            aria-label="Volume"
+                                        >
+                                            <Volume2 size={14} />
+                                        </button>
+                                    </Fragment>
+                                }
                             </div>
 
                             {/* Bottom panel (group for hover) */}
@@ -151,7 +170,7 @@ export default function ReferenceCard({
 
                                 {/* Smooth hover expand using grid-rows */}
                                 <div className="mt-2 flex-1 overflow-auto">
-                                    <div className="h-full text-sm" dangerouslySetInnerHTML={{__html: intro}} />
+                                    <div className="h-full text-sm" dangerouslySetInnerHTML={{ __html: intro }} />
                                 </div>
                             </div>
                             {/* /Bottom panel */}
