@@ -33,7 +33,7 @@ export default function ReferenceCard({
                             className="w-full h-[480px] object-cover absolute top-0 left-0"
                         />
 
-                        <div className="flex flex-col h-full">
+                        <div className="flex flex-col h-full group">
                             <div className="flex-1 relative">
                                 <button
                                     type="button"
@@ -46,7 +46,7 @@ export default function ReferenceCard({
                             </div>
 
                             {/* Bottom panel (group for hover) */}
-                            <div className="relative min-h-44 p-5 bg-white group">
+                            <div className="relative min-h-44 p-5 bg-white">
                                 {/* logo badge */}
                                 <div className="absolute rounded-full flex items-center justify-center p-1 border-[#76A0B5] border-2 h-18 w-18 bg-white bottom-full translate-y-1/2">
                                     <img
