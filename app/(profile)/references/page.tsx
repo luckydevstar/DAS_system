@@ -1,4 +1,7 @@
 import ReferencesFilter from "@/components/profile/driving-info/references/reference-filter/ReferencesFilter";
+import ReferenceCard from "@/components/profile/driving-info/references/reference-list/ReferenceCard";
+import ReferenceList from "@/components/profile/driving-info/references/reference-list/ReferenceList";
+import ReferenceListItem from "@/components/profile/driving-info/references/reference-list/ReferenceListItem";
 import TabNav from "@/components/profile/driving-info/tab-nav/TabNav";
 import UserInfo from "@/components/profile/user-info/UserInfo";
 
@@ -10,7 +13,7 @@ const References = () => {
                 <UserInfo />
                 <div className="flex flex-col flex-1 gap-8">
                     <TabNav />
-                    
+                    <ReferenceList />
                 </div>
             </div>
         </div>
