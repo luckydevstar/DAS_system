@@ -18,8 +18,6 @@ export default function ReferenceCard({
 }: ReferenceListItemType) {
     const [flipped, setFlipped] = useState(false);
 
-    console.log("?????????", name, intro)
-
     return (
         <div className="w-full">
             <div className="relative [perspective:1200px]">
