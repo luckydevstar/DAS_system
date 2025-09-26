@@ -18,6 +18,8 @@ export default function ReferenceCard({
 }: ReferenceListItemType) {
     const [flipped, setFlipped] = useState(false);
 
+    console.log("?????????", name, intro)
+
     return (
         <div className="w-full">
             <div className="relative [perspective:1200px]">
@@ -133,9 +135,9 @@ export default function ReferenceCard({
                                 videoUrl &&
                                 <Fragment>
 
-                                    <div className="flex relative">
+                                    <div className="flex flex-1 relative overflow-hidden">
                                         <div className="h-full w-full">
-                                            <img src={videoUrl} className="w-full h-full object-cover" />
+                                            <img src={videoUrl} className="w-full object-cover" />
                                         </div>
 
                                         {/* Floating media buttons */}
