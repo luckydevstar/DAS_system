@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 const ActiveTabItem = ({ title, slug }: { title: string, slug: string }) => {
     return (
         <li className="me-2">
-            <Link href={slug} className="inline-block p-4 text-black border-b-2 border-black rounded-t-lg active" aria-current="page">{title}</Link>
+            <Link href={slug} className="inline-block py-4 px-2 text-black border-b-2 border-black rounded-t-lg active" aria-current="page">{title}</Link>
         </li>
     )
 }
@@ -14,7 +14,7 @@ const ActiveTabItem = ({ title, slug }: { title: string, slug: string }) => {
 const TabItem = ({ title, slug }: { title: string, slug: string }) => {
     return (
         <li className="me-2">
-            <Link href={slug} className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300">{title}</Link>
+            <Link href={slug} className="inline-block py-4 px-2 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300">{title}</Link>
         </li>
     )
 }
@@ -31,6 +31,18 @@ const NAV_LIST = [
     {
         title: "References",
         slug: "references"
+    },
+    {
+        title: "Media",
+        slug: "media"
+    },
+    {
+        title: "CRB Checks",
+        slug: "crb-checks"
+    },
+    {
+        title: "Health Checks",
+        slug: "health-checks"
     },
     {
         title: "CV",
