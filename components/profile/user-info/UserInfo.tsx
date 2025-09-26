@@ -71,12 +71,13 @@ const UserInfo = () => {
                             </li>
                             <li>
                                 <span className="text-sm font-bold mr-1">Licence Number:</span>
+                                <br />
                                 <span>{USER_INFO.cpcStatus.licenceMumber}</span>
                             </li>
                             <li>
                                 <span className="text-sm font-bold mr-1">Driver CPC Card Number:</span>
                                 <br />
-                                <span className="block text-left pl-4">{USER_INFO.cpcStatus.cardNumber}</span>
+                                <span className="block text-left">{USER_INFO.cpcStatus.cardNumber}</span>
                             </li>
                         </ul>
                         <div className="flex items-center gap-1">
