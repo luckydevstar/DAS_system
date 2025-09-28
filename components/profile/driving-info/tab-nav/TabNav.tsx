@@ -26,7 +26,7 @@ const NAV_LIST = [
     },
     {
         title: "Accreditations",
-        slug: "#"
+        slug: "accreditations"
     },
     {
         title: "References",
