@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { CirclePlay, CirclePlus, ExternalLink, Globe, Info, Mail } from "lucide-react";
-import Image from "next/image";
 
 const USER_INFO = {
     name: "Simon Sample",

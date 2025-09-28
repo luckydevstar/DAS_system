@@ -135,7 +135,7 @@ export default function ReferenceCard({
 
                                     <div className="flex flex-1 relative overflow-hidden">
                                         <div className="h-full w-full">
-                                            <img src={videoUrl} className="w-full object-cover" />
+                                            <img src={videoUrl} className="w-full object-cover" alt="video" />
                                         </div>
 
                                         {/* Floating media buttons */}

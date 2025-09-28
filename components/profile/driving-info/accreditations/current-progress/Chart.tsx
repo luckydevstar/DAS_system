@@ -40,7 +40,7 @@ const StatisticsChart = () => {
         }, 3000);
 
         return () => clearInterval(interval);
-    }, [])
+    }, [statisticsData.length])
 
     return (
         <Fragment>

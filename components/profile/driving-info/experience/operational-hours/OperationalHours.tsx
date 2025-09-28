@@ -140,7 +140,6 @@ export default function OperationalHoursLegacy() {
     const totals = useMemo(() => sumTree(DATA), []);
     const flat = useMemo(() => flatten(DATA, expanded), [expanded]);
 
-    const headerBg = '';
     const headerText = 'text-white/95';
 
     return (
@@ -173,7 +172,7 @@ export default function OperationalHoursLegacy() {
                         <TableRow className={`bg-[#6B95A5] hover:bg-[#6B95A5] border-none`}>
                             <TableHead className="text-left font-medium text-white pt-5 px-5 pb-2">Class/Category</TableHead>
                             {COLS.map((c, i) => (
-                                <TableHead key={c.key} className={`text-right font-medium text-white`}>
+                                <TableHead key={i} className={`text-right font-medium text-white`}>
                                     {c.label}
                                 </TableHead>
                             ))}

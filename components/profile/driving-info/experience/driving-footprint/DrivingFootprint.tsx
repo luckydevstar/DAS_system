@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { GoogleMap, useJsApiLoader, Autocomplete } from '@react-google-maps/api';
 import { Info } from 'lucide-react';
 
@@ -16,11 +16,6 @@ const containerStyle: React.CSSProperties = { width: '100%', flexGrow: 1, border
 const defaultCenter = { lat: 50.1109, lng: 8.6821 }; // Frankfurt-ish
 const libraries: ('places')[] = ['places'];
 
-// Soft colors like your mock
-const COLOR_DRIVEN = '#6B95A5';
-const COLOR_NOT_DRIVEN = '#E5E7EB';
-const STROKE = '#567889';
-
 export default function DrivingFootprint({
     title = 'Driving Footprint',
     drivenIsoA2 = ['DE', 'FR', 'BE', 'NL', 'LU', 'AT', 'CZ', 'PL', 'HU', 'IT', 'ES', 'PT'],
@@ -33,60 +28,6 @@ export default function DrivingFootprint({
 
     const mapRef = useRef<google.maps.Map | null>(null);
     const autoRef = useRef<google.maps.places.Autocomplete | null>(null);
-    const [selectedIso, setSelectedIso] = useState<string | null>(null);
-
-    const drivenSet = useMemo(() => new Set(drivenIsoA2.map(s => s.toUpperCase())), [drivenIsoA2]);
-    const selectedHours = selectedIso ? (hoursByCountry[selectedIso] ?? 0) : 0;
-
-    // useEffect(() => {
-    //     if (!isLoaded || !mapRef.current) return;
-
-    //     const map = mapRef.current;
-
-    //     // Load country polygons (Natural Earth via datasets/geo-countries)
-    //     // You can host your own GeoJSON if you prefer.
-    //     map.data.loadGeoJson(
-    //         'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
-    //     );
-
-    //     // Style countries by driven/not-driven
-    //     map.data.setStyle((feature) => {
-    //         const isoA2 =
-    //             (feature.getProperty('ISO_A2') || feature.getProperty('ISO3166-1-Alpha-2') || '').toString().toUpperCase();
-
-    //         const driven = drivenSet.has(isoA2);
-    //         return {
-    //             // Fill
-    //             fillColor: driven ? COLOR_DRIVEN : COLOR_NOT_DRIVEN,
-    //             fillOpacity: driven ? 0.9 : 0.6,
-    //             // Stroke
-    //             strokeColor: STROKE,
-    //             strokeOpacity: driven ? 0.9 : 0.5,
-    //             strokeWeight: driven ? 1 : 0.5,
-    //             zIndex: driven ? 2 : 1,
-    //         };
-    //     });
-
-    //     // Click to select country and show hours
-    //     const clickListener = map.data.addListener('click', (e: any) => {
-    //         const f = e.feature;
-    //         const isoA2 =
-    //             (f.getProperty('ISO_A2') || f.getProperty('ISO3166-1-Alpha-2') || '').toString().toUpperCase() || null;
-    //         if (!isoA2) return;
-
-    //         setSelectedIso(isoA2);
-
-    //         // Fit bounds to clicked country
-    //         const b = new google.maps.LatLngBounds();
-    //         f.getGeometry()?.forEachLatLng((ll: any) => b.extend(ll));
-    //         if (!b.isEmpty()) map.fitBounds(b, { top: 40, right: 40, bottom: 40, left: 40 });
-    //     });
-
-    //     return () => {
-    //         clickListener.remove();
-    //         map.data.forEach((f) => map.data.remove(f)); // cleanup features
-    //     };
-    // }, [isLoaded, drivenSet]);
 
     if (!isLoaded) {
         return (

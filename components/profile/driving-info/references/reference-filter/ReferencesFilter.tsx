@@ -3,8 +3,6 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { LayoutList, LayoutGrid } from "lucide-react";
 
-const ACTIVE_COLOR = "#007FA3";
-
 export default function ReferencesFilter() {
     const router = useRouter();
     const pathname = usePathname();

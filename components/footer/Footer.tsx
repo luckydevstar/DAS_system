@@ -5,7 +5,7 @@ import { Separator } from "../ui/separator";
 const Footer = () => {
     return (
         <div className="bg-white flex items-center justify-around py-2 mt-16">
-            <img src={"/images/footer-logo.png"} className="w-72 h-auto" />
+            <img src={"/images/footer-logo.png"} className="w-72 h-auto" alt="logo" />
             <div className="flex items-center gap-4 h-4">
                 <Button asChild variant="link" className="text-[#76A0B5]">
                     <Link href={"#"}>About</Link>

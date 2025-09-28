@@ -6,8 +6,6 @@ import PostDetailItem2 from "./items/Item2"
 import PostDetailItem3 from "./items/Item3"
 import MediaItem, { MediaItemType } from "./MediaItem"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Cross } from "lucide-react"
 
 const mediaList: MediaItemType[] = [
     {

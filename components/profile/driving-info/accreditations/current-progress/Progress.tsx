@@ -7,7 +7,6 @@ import { useEffect, useId, useState } from "react";
 
 function ProgressRing({
     percent,
-    idx,
     animateOnMount,
     size = 44,
     trackColor = "#E5E7EB",
@@ -63,8 +62,8 @@ function ProgressRing({
                     style={
                         {
                             // endpoints for keyframes
-                            ["--dash-from" as any]: CIRC,
-                            ["--dash-to" as any]: dashTo,
+                            ["--dash-from"]: CIRC,
+                            ["--dash-to"]: dashTo,
                             // set via CSS property (not only SVG attribute)
                             strokeDasharray: CIRC,
                             strokeDashoffset: "var(--dash-from)",
@@ -98,7 +97,7 @@ const Progress = () => {
 
     const [api, setApi] = useState<CarouselApi>();
     const [current, setCurrent] = useState(0);
-    const [count, setCount] = useState(0);
+    const [_, setCount] = useState(0);
 
     useEffect(() => {
         if (!api) {
