@@ -1,10 +1,81 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Separator } from "@/components/ui/separator";
 import GradientAreaChart from "./GradientAreaChart";
+
+function ProgressRing({
+    percent,
+    idx,
+    animateOnMount,
+    size = 44,
+    trackColor = "#E5E7EB",
+}: {
+    percent: number;
+    idx: number;
+    animateOnMount: boolean;
+    size?: number;
+    trackColor?: string;
+}) {
+    const R = 16;
+    const CIRC = 2 * Math.PI * R;                 // ~100.53
+    const dashTo = CIRC * (1 - percent / 100);
+    const gradientId = useId();
+
+    // Add the animation class *after* the first paint
+    const [run, setRun] = useState(false);
+    useEffect(() => {
+        if (!animateOnMount) return;
+        const raf = requestAnimationFrame(() => setRun(true));
+        return () => cancelAnimationFrame(raf);
+    }, [animateOnMount]);
+
+    return (
+        <div className="relative" style={{ width: size * 4, height: size * 4 }}>
+            <svg
+                className="size-full -rotate-90"
+                viewBox="0 0 36 36"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label={`${percent}% progress`}
+            >
+                <defs>
+                    <linearGradient id={`grad-${gradientId}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#F8DA5F" />
+                        <stop offset="100%" stopColor="#F76E1E" />
+                    </linearGradient>
+                </defs>
+
+                {/* Track */}
+                <circle cx="18" cy="18" r={R} fill="none" stroke={trackColor} strokeWidth="4" opacity="0.35" />
+
+                {/* Progress arc */}
+                <circle
+                    cx="18"
+                    cy="18"
+                    r={R}
+                    fill="none"
+                    stroke={`url(#grad-${gradientId})`}
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    className={run ? "ring-run" : ""}
+                    // Use CSS vars + CSS property to ensure animation sees both endpoints
+                    style={
+                        {
+                            // endpoints for keyframes
+                            ["--dash-from" as any]: CIRC,
+                            ["--dash-to" as any]: dashTo,
+                            // set via CSS property (not only SVG attribute)
+                            strokeDasharray: CIRC,
+                            strokeDashoffset: "var(--dash-from)",
+                        } as React.CSSProperties
+                    }
+                />
+            </svg>
+        </div>
+    );
+}
 
 const CurrentProgress = () => {
     const progressData = [
@@ -56,55 +127,31 @@ const CurrentProgress = () => {
                     }}
                 >
                     <CarouselContent>
-                        {
-                            progressData.map((item, idx) => {
-                                const isActive = current - 1 === idx;
-                                return (
-                                    <CarouselItem key={idx} className="basis-1/3 flex justify-center">
-                                        <div className={`relative w-max transition-transform duration-500 ${isActive ? "scale-100 z-10" : "scale-80 opacity-70"}`}>
-                                            <div className="relative size-44">
-                                                <svg
-                                                    className="size-full -rotate-90"
-                                                    viewBox="0 0 36 36"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                    <defs>
-                                                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                                            <stop offset="0%" stopColor="#F8DA5F" />   {/* blue-500 */}
-                                                            <stop offset="100%" stopColor="#F76E1E" /> {/* cyan-500 */}
-                                                        </linearGradient>
-                                                    </defs>
+                        {progressData.map((item, idx) => {
+                            const isActive = current - 1 === idx;          // your scaling logic
+                            const animateOnMount = true;                // first three only
 
-                                                    {/* progress circle with gradient stroke */}
-                                                    <circle
-                                                        cx="18"
-                                                        cy="18"
-                                                        r="16"
-                                                        fill="none"
-                                                        stroke="url(#gradient)"
-                                                        strokeWidth="4"
-                                                        strokeDasharray={100}
-                                                        strokeDashoffset={100 - item.progress}
-                                                        strokeLinecap="round"
-                                                    />
-                                                </svg>
-                                            </div>
-
-                                            <Card className="select-none absolute shadow-md rounded-full w-32 h-32 p-1 flex items-center justify-center flex-col gap-1 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -mb-4">
-                                                <img src="/images/logo-small.png" className="w-4 h-auto" />
-                                                <Separator className="w-8!" />
-                                                <h3 className="text-xs wrap-break-word text-center">{item.title}</h3>
-                                                <Separator className="w-8!" />
-                                                <div className="text-center">
-                                                    <span className="text-lg font-bold">{item.progress}</span>
-                                                    <span className="text-sm font-semibold">%</span>
-                                                </div>
-                                            </Card>
+                            return (
+                                <CarouselItem key={idx} className="basis-1/3 flex justify-center">
+                                    <div className={`relative w-max transition-transform duration-500 ${isActive ? "scale-100 z-10" : "scale-80 opacity-70"}`}>
+                                        <div className="relative size-44">
+                                            <ProgressRing percent={item.progress} idx={idx} animateOnMount={animateOnMount} />
                                         </div>
-                                    </CarouselItem>
-                                )
-                            })
-                        }
+
+                                        <Card className="select-none absolute shadow-md rounded-full w-32 h-32 p-1 flex items-center justify-center flex-col gap-1 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -mb-4">
+                                            <img src="/images/logo-small.png" className="w-4 h-auto" />
+                                            <Separator className="w-8!" />
+                                            <h3 className="text-xs wrap-break-word text-center">{item.title}</h3>
+                                            <Separator className="w-8!" />
+                                            <div className="text-center">
+                                                <span className="text-lg font-bold">{item.progress}</span>
+                                                <span className="text-sm font-semibold">%</span>
+                                            </div>
+                                        </Card>
+                                    </div>
+                                </CarouselItem>
+                            );
+                        })}
                     </CarouselContent>
                     <CarouselPrevious />
                     <CarouselNext />
@@ -151,14 +198,14 @@ const CurrentProgress = () => {
                 <span className="text-xs font-semibold">STARTED ON 27th MAR 2025</span>
                 <div className="flex items-center justify-around flex-1">
                     {
-                        ["","","","","","","","","","",""].map((_, idx) => {
+                        ["", "", "", "", "", "", "", "", "", "", ""].map((_, idx) => {
                             return (
                                 <div className="w-3 h-3 rounded-full bg-black" key={idx} />
                             )
                         })
                     }
                     {
-                        ["","","","",""].map((_, idx) => {
+                        ["", "", "", "", ""].map((_, idx) => {
                             return (
                                 <div className="w-2 h-2 rounded-full bg-black/40" key={idx} />
                             )
@@ -167,6 +214,16 @@ const CurrentProgress = () => {
                 </div>
                 <span className="text-xs font-semibold">EXPECTED GRADUATION IN 30 DAYS</span>
             </div>
+            <style jsx global>{`
+                @keyframes ringFill {
+                    from { stroke-dashoffset: var(--dash-from); }
+                    to   { stroke-dashoffset: var(--dash-to); }
+                }
+                .ring-run {
+                    animation: ringFill 900ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+                    will-change: stroke-dashoffset;
+                }
+                `}</style>
         </Card>
     )
 }

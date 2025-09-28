@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card"
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import React from "react";
+import { useEffect, useState } from "react";
 
 const drivingInductionData = [
     {
@@ -22,16 +22,8 @@ const drivingInductionData = [
         vechileClass: "C1",
     },
     {
-        image: "/images/di/di-asda.png",
-        company: "ASDA",
-        course: "Driver Induction",
-        revisionDate: "1 October 2025",
-        publishedBy: "Mel Rishmond",
-        vechileClass: "C1",
-    },
-    {
-        image: "/images/di/di-royal-mail.png",
-        company: "Royal Mail",
+        image: "/images/di/di-gxo.png",
+        company: "GXO",
         course: "Driver Induction",
         revisionDate: "1 October 2025",
         publishedBy: "Mel Rishmond",
@@ -40,11 +32,11 @@ const drivingInductionData = [
 ]
 
 const DrvingInductions = () => {
-    const [api, setApi] = React.useState<CarouselApi>()
-    const [current, setCurrent] = React.useState(0)
-    const [count, setCount] = React.useState(0)
+    const [api, setApi] = useState<CarouselApi>()
+    const [current, setCurrent] = useState(0)
+    const [count, setCount] = useState(0)
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (!api) {
             return
         }
