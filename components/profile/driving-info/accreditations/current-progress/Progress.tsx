@@ -75,23 +75,24 @@ function ProgressRing({
     );
 }
 
-const Progress = () => {
+const Progress = ({ setCurrentIndex }: { setCurrentIndex: (i: number) => void }) => {
     const progressData = [
+
         {
             title: "First Aid",
-            progress: 23
-        },
-        {
-            title: "Driver Development",
             progress: 75
         },
         {
-            title: "First Safety",
+            title: "Driver Development",
             progress: 57
         },
         {
             title: "First Safety",
             progress: 89
+        },
+        {
+            title: "Second Aid",
+            progress: 65
         },
     ]
 
@@ -111,6 +112,10 @@ const Progress = () => {
             setCurrent(api.selectedScrollSnap() + 1)
         })
     }, [api]);
+
+    useEffect(() => {
+        setCurrentIndex(current % progressData.length);
+    }, [current, setCurrentIndex])
 
     return (
         <Carousel

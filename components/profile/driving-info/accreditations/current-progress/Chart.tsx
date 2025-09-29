@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import GradientAreaChart from "./GradientAreaChart";
 
-const StatisticsChart = () => {
+const StatisticsChart = ({currentIndex: activeDataIndex}: {currentIndex: number}) => {
     const statisticsData = [
         {
             totalHours: 26,
@@ -29,18 +29,36 @@ const StatisticsChart = () => {
             numOfDots: 16,
             numOfActiveDots: 8,
         },
+        {
+            totalHours: 32,
+            numCompltedUnits: 2,
+            numRemainingUnits: 7,
+            chartData: {
+                numbers: [8.8, 9.7, 8.2, 7.4, 5.5],
+                labels: ["", "APR", "MAY", "JUN", ""],
+            },
+            startDate: "16th MAY 2025",
+            numGraduationDays: 22,
+            numOfDots: 16,
+            numOfActiveDots: 9,
+        },
+        {
+            totalHours: 32,
+            numCompltedUnits: 1,
+            numRemainingUnits: 9,
+            chartData: {
+                numbers: [4.8, 9.2, 5.2, 6.4, 5.5],
+                labels: ["", "APR", "MAY", "JUN", ""],
+            },
+            startDate: "16th MAY 2025",
+            numGraduationDays: 45,
+            numOfDots: 16,
+            numOfActiveDots: 9,
+        },
         // ... more items
     ];
 
-    const [activeDataIndex, setActiveDataIndex] = useState(0);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setActiveDataIndex(prev => (prev + 1) % statisticsData.length);
-        }, 3000);
-
-        return () => clearInterval(interval);
-    }, [statisticsData.length])
+    // const [activeDataIndex, setActiveDataIndex] = useState(0);
 
     return (
         <Fragment>
