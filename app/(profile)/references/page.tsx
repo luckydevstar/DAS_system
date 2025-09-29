@@ -6,7 +6,7 @@ import { Suspense } from "react";
 
 const References = () => {
     return (
-        <div className="max-w-7xl mx-auto py-9">
+        <div className="max-w-7xl mx-auto mt-9">
             <Suspense fallback={<div className="h-9 w-[260px]" />} >
                 <ReferencesFilter />
             </Suspense>

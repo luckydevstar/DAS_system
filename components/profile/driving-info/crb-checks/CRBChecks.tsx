@@ -58,7 +58,7 @@ const checksData = [
 
 const CRBChecks = () => {
     return (
-        <div>
+        <div className="w-full -mt-[10px]">
             <Accordion
                 type="single"
                 collapsible

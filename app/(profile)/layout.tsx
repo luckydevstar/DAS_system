@@ -6,6 +6,7 @@ const Page = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="bg-[#fafafa]">
       <Header />
+      <div className="h-[160px] bg-[#76A0B5]" />
       {children}
       <Footer />
     </div>
