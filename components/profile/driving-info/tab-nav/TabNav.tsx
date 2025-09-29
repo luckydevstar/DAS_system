@@ -43,10 +43,6 @@ const NAV_LIST = [
     {
         title: "Health Checks",
         slug: "health-checks"
-    },
-    {
-        title: "CV",
-        slug: "#"
     }
 ]
 
