@@ -32,7 +32,26 @@ const checksData = [
     {
         dataOfIssue: "17 NOVEMBER 2024",
         records: [
-
+            {
+                title: "Police Records of Convictions, Cautions, Reprimands and Warnings",
+                data: []
+            },
+            {
+                title: "Information from the list under Section 142 of the Education Act 2002",
+                data: []
+            },
+            {
+                title: `ISA Children’s Barred List information`,
+                data: []
+            },
+            {
+                title: `ISA Vulnerable Adults’ Barred List information`,
+                data: []
+            },
+            {
+                title: "Other relevant information disclosed at the Chief Police Officer(s) discretion",
+                data: []
+            },
         ]
     }
 ]
