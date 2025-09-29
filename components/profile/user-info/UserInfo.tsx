@@ -21,7 +21,7 @@ const USER_INFO = {
 
 const UserInfo = () => {
     return (
-        <div className="relative px-4 py-7 w-80 rounded-2xl shadow-md bg-white mt-15 h-max">
+        <div className="relative px-4 py-7 w-80 shrink-0 rounded-2xl shadow-md bg-white mt-15 h-max">
             <div className="absolute flex flex-col justify-center gap-2 items-center bottom-full mb-10">
                 <div className="rounded-full w-34 h-34 border border-white">
                     <img src="/images/avatar.jpg" alt="avatar" className="w-full h-full object-cover rounded-full" />
