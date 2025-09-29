@@ -3,7 +3,7 @@ import TabNav from "../driving-info/tab-nav/TabNav";
 
 const Nav = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className="w-full sticky top-[90px] bg-[#FAFAFA]  z-40">
+        <div className="w-full sticky top-[90px] bg-[#FAFAFA] z-40">
             <div className="max-w-7xl mx-auto pt-4 py-8 flex gap-8">
                 <div className="flex flex-col justify-center gap-2 items-center bottom-full w-80 shrink-0 -mt-28">
                     <div className="rounded-full w-34 h-34 border border-white">
