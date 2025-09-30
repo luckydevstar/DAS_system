@@ -87,11 +87,11 @@ const Progress = ({ setCurrentIndex }: { setCurrentIndex: (i: number) => void })
             progress: 57
         },
         {
-            title: "First Safety",
+            title: "Fire Safety",
             progress: 89
         },
         {
-            title: "Second Aid",
+            title: "Forklift (Warehouse)",
             progress: 65
         },
     ]

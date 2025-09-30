@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { CirclePlay, CirclePlus, ExternalLink, Globe, Info, Mail } from "lucide-react";
+import { CheckSquare, CirclePlay, CirclePlus, ExternalLink, Globe, Info, Mail } from "lucide-react";
 
 const USER_INFO = {
     name: "Simon Sample",
+    d4: "In Date",
     role: "Long-Haul Driver",
     location: "London, UK",
     website: "simonlonghauldriving.com",
@@ -24,6 +25,10 @@ const UserInfo = () => {
         <div className="relative px-4 py-7 w-80 shrink-0 rounded-2xl shadow-md bg-white h-max">
             <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-1.5">
+                    <div className="flex items-center gap-3">
+                        <CheckSquare size={16} />
+                        <span>D4: {USER_INFO.d4}</span>
+                    </div>
                     <div className="flex items-center gap-3">
                         <Info size={16} />
                         <span>{USER_INFO.role}</span>
@@ -56,46 +61,46 @@ const UserInfo = () => {
                 <div className="w-full flex flex-col gap-6">
                     <img src={"/images/das-card.png"} className="w-full h-auto" />
                     <div className="flex flex-col gap-2">
-                        <h4 className="text-sm font-bold">Diver CPC Status</h4>
-                        <ul className="flex flex-col gap-2">
+                        <h4 className="text-base font-bold">Diver CPC Status</h4>
+                        <ul className="flex flex-col gap-2 list-disc pl-8" >
                             <li>
                                 <span className="text-sm font-bold mr-1">Driver Name:</span>
-                                <span>{USER_INFO.cpcStatus.name}</span>
+                                <span className="text-sm ml-2">{USER_INFO.cpcStatus.name}</span>
                             </li>
                             <li>
                                 <span className="text-sm font-bold mr-1">Licence Number:</span>
                                 <br />
-                                <span>{USER_INFO.cpcStatus.licenceMumber}</span>
+                                <span className="text-sm ml-2">{USER_INFO.cpcStatus.licenceMumber}</span>
                             </li>
                             <li>
                                 <span className="text-sm font-bold mr-1">Driver CPC Card Number:</span>
                                 <br />
-                                <span className="block text-left">{USER_INFO.cpcStatus.cardNumber}</span>
+                                <span className="block text-left text-sm ml-2">{USER_INFO.cpcStatus.cardNumber}</span>
                             </li>
                         </ul>
                         <div className="flex items-center gap-1">
                             <span className="text-sm font-bold">Status:</span>
-                            <span>{USER_INFO.cpcStatus.status}</span>
+                            <span className="text-sm">{USER_INFO.cpcStatus.status}</span>
                         </div>
                         <div className="flex items-center gap-1">
                             <span className="text-sm font-bold">Card Expiry Date:</span>
-                            <span>{USER_INFO.cpcStatus.expiryDate}</span>
+                            <span className="text-sm">{USER_INFO.cpcStatus.expiryDate}</span>
                         </div>
                         <div className="flex items-center gap-1">
                             <span className="text-sm font-bold">Training Hours Completed:</span>
-                            <span>{USER_INFO.cpcStatus.trainingHoursCompleted}</span>
+                            <span className="text-sm">{USER_INFO.cpcStatus.trainingHoursCompleted}</span>
                         </div>
                         <div className="flex items-center gap-1">
                             <span className="text-sm font-bold">Modules Completed:</span>
-                            <span>{USER_INFO.cpcStatus.modulesCompleted}</span>
+                            <span className="text-sm">{USER_INFO.cpcStatus.modulesCompleted}</span>
                         </div>
                         <div className="flex items-center gap-1">
                             <span className="text-sm font-bold">Training Period:</span>
-                            <span>{USER_INFO.cpcStatus.trainingPeriod}</span>
+                            <span className="text-sm">{USER_INFO.cpcStatus.trainingPeriod}</span>
                         </div>
                         <div className="flex items-center gap-1">
                             <span className="text-sm font-bold">Next Renewel Due:</span>
-                            <span>{USER_INFO.cpcStatus.nextRenewalDue}</span>
+                            <span className="text-sm">{USER_INFO.cpcStatus.nextRenewalDue}</span>
                         </div>
                     </div>
                 </div>

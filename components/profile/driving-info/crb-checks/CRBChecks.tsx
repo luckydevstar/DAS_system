@@ -1,6 +1,4 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Download } from "lucide-react";
 
 const checksData = [
@@ -30,7 +28,7 @@ const checksData = [
         ]
     },
     {
-        dataOfIssue: "17 NOVEMBER 2024",
+        dataOfIssue: "08 JULY 2023",
         records: [
             {
                 title: "Police Records of Convictions, Cautions, Reprimands and Warnings",
@@ -72,7 +70,7 @@ const CRBChecks = () => {
                                 <AccordionTrigger className="bg-white shadow-xs px-4 hover:no-underline cursor-pointer">
                                     <div className="flex gap-3 flex-col px-4">
                                         <h3 className="text-sm font-semibold text-[#76A0B5]">Date of Issue</h3>
-                                        <div className="flex items-center gap-8 px-10 py-2">
+                                        <div className="flex items-center gap-8 px-10 py-2 w-96 justify-between">
                                             <span className="text-sm font-semibold">{item.dataOfIssue}</span>
                                             <span className="text-[#76A0B5] flex gap-1 items-center">
                                                 <Download size={14} />

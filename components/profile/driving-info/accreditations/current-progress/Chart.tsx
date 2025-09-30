@@ -17,7 +17,7 @@ const StatisticsChart = ({currentIndex: activeDataIndex}: {currentIndex: number}
             numOfActiveDots: 10,
         },
         {
-            totalHours: 32,
+            totalHours: 30,
             numCompltedUnits: 2,
             numRemainingUnits: 7,
             chartData: {
@@ -30,7 +30,7 @@ const StatisticsChart = ({currentIndex: activeDataIndex}: {currentIndex: number}
             numOfActiveDots: 8,
         },
         {
-            totalHours: 32,
+            totalHours: 24,
             numCompltedUnits: 2,
             numRemainingUnits: 7,
             chartData: {
@@ -43,7 +43,7 @@ const StatisticsChart = ({currentIndex: activeDataIndex}: {currentIndex: number}
             numOfActiveDots: 9,
         },
         {
-            totalHours: 32,
+            totalHours: 35,
             numCompltedUnits: 1,
             numRemainingUnits: 9,
             chartData: {
