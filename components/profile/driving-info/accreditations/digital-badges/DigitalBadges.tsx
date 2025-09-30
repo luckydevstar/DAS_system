@@ -5,10 +5,10 @@ const DigitalBadegs = () => {
     const badgeData = [
         {
             image: "/images/badge/driver-load-safety.png",
-            title: "Driver Load Safty",
+            title: "Driver Load Safety",
             date: "02 Feb 2024",
             name: "Melanie Richmond FCIPD",
-            position: "raining Manager Asda Logistic Services",
+            position: "Training Manager Asda Logistic Services",
             type: "In-person",
             hours: "8hrs",
             provider: "Heads Of The Valleys Training",
@@ -16,10 +16,10 @@ const DigitalBadegs = () => {
         },
         {
             image: "/images/badge/emergency.png",
-            title: "Driver Load Safty",
+            title: "Frist Aid",
             date: "02 Feb 2024",
             name: "Melanie Richmond FCIPD",
-            position: "raining Manager Asda Logistic Services",
+            position: "Training Manager Asda Logistic Services",
             type: "In-person",
             hours: "8hrs",
             provider: "Heads Of The Valleys Training",
@@ -27,10 +27,10 @@ const DigitalBadegs = () => {
         },
         {
             image: "/images/badge/safe-driving.png",
-            title: "Driver Load Safty",
+            title: "Safe Driving",
             date: "02 Feb 2024",
             name: "Melanie Richmond FCIPD",
-            position: "raining Manager Asda Logistic Services",
+            position: "Training Manager Asda Logistic Services",
             type: "In-person",
             hours: "8hrs",
             provider: "Heads Of The Valleys Training",
@@ -38,10 +38,10 @@ const DigitalBadegs = () => {
         },
         {
             image: "/images/badge/lorry-loader.png",
-            title: "Driver Load Safty",
+            title: "HIAB",
             date: "02 Feb 2024",
             name: "Melanie Richmond FCIPD",
-            position: "raining Manager Asda Logistic Services",
+            position: "Training Manager Asda Logistic Services",
             type: "In-person",
             hours: "8hrs",
             provider: "Heads Of The Valleys Training",
@@ -49,10 +49,10 @@ const DigitalBadegs = () => {
         },
         {
             image: "/images/badge/truck-mounted.png",
-            title: "Driver Load Safty",
+            title: "FORK LIFT",
             date: "02 Feb 2024",
             name: "Melanie Richmond FCIPD",
-            position: "raining Manager Asda Logistic Services",
+            position: "Training Manager Asda Logistic Services",
             type: "In-person",
             hours: "8hrs",
             provider: "Heads Of The Valleys Training",
@@ -73,7 +73,7 @@ const DigitalBadegs = () => {
                                         <img src={item.image} className="w-32 h-32 object-center object-cover" />
                                     </div>
                                 </HoverCardTrigger>
-                                <HoverCardContent side="right">
+                                <HoverCardContent side="right" className="w-max">
                                     <div className="flex flex-col gap-4">
                                         <div>
                                             <div className="text-base">{item.title}</div>
