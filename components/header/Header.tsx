@@ -17,7 +17,7 @@ const Header = () => {
                         </div>
                         <div className="rounded-full bg-[#FF0000] absolute right-0 top-0 w-3.5 h-3.5 transform -translate-y-1/2 translate-x-[5px]"></div>
                     </PopoverTrigger>
-                    <PopoverContent side="bottom" align="end" className="w-96 px-6 py-6">
+                    <PopoverContent side="bottom" align="end" className="w-[400px] px-6 py-6">
                         <h3 className="text-sm font-bold mb-4">App</h3>
                         <div className="flex flex-wrap gap-6 w-full justify-between">
                             <div className="flex flex-col justify-center gap-1 items-center cursor-pointer">
@@ -44,7 +44,7 @@ const Header = () => {
                                 <Card className="w-16 h-16 rounded-lg p-2 shadow-md bg-[#76A0B5]">
                                     <Handshake className="w-full h-full text-white" />
                                 </Card>
-                                <h2 className="text-center text-xs font-semibold text-blsck/70">Frields</h2>
+                                <h2 className="text-center text-xs font-semibold text-blsck/70">Friends</h2>
                             </div>
                         </div>
                         <div className="flex flex-wrap gap-6 w-full justify-between mt-6">
