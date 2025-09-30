@@ -1,7 +1,7 @@
 "use client"
 
 import { Card } from "@/components/ui/card"
-import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
 
 const drivingInductionData = [
@@ -50,12 +50,13 @@ const DrvingInductions = () => {
     }, [api])
     return (
         <Card className="p-8 rounded-2xl gap-2">
-            <h3 className="text-2xl font-bold mt-4">Driving Inductions</h3>
+            <h3 className="text-2xl font-bold mt-4">Driver Inductions</h3>
             <div className="py-4 px-10 grid grid-cols-2">
                 <div className="col-span-1">
                     <Carousel
                         opts={{
                             loop: true,
+                            
                         }}
                         setApi={setApi}
                     >
@@ -72,6 +73,8 @@ const DrvingInductions = () => {
                                 })
                             }
                         </CarouselContent>
+                        <CarouselPrevious className="ml-8 cursor-pointer" />
+                        <CarouselNext className="mr-8 cursor-pointer" />
                     </Carousel>
                     <div className="w-full flex justify-center gap-2 mt-4 -ml-1">
                     {

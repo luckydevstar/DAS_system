@@ -123,7 +123,6 @@ const Progress = ({ setCurrentIndex }: { setCurrentIndex: (i: number) => void })
             opts={{
                 align: "center",
                 loop: true,
-
             }}
         >
             <CarouselContent>
