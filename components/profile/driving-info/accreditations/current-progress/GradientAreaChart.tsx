@@ -58,12 +58,12 @@ const GradientAreaChart: React.FC<GradientAreaChartProps> = ({
                         <radialGradient
                             id={gradId}
                             gradientUnits="objectBoundingBox"
-                            cx="50%" cy="40%" r="150%"
+                            cx="50%" cy="40%" r="160%"
                             fx="50%" fy="50%"
                         >
                             {/* top cap darkness */}
                             <stop offset="0%" stopColor="#FFFFFF" stopOpacity={0.1} />
-                            <stop offset="40%" stopColor="#5F5F5F" stopOpacity={0.9} />
+                            <stop offset="40%" stopColor="#0F0F0F" stopOpacity={0.9} />
                             <stop offset="85%" stopColor="#E9E9E9" stopOpacity={0.7} />
                             <stop offset="100%" stopColor="#2F2F2F" stopOpacity={1} />
                         </radialGradient>
