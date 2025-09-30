@@ -61,8 +61,8 @@ const UserInfo = () => {
                 <div className="w-full flex flex-col gap-6">
                     <img src={"/images/das-card.png"} className="w-full h-auto" />
                     <div className="flex flex-col gap-2">
-                        <h4 className="text-base font-bold">Diver CPC Status</h4>
-                        <ul className="flex flex-col gap-2 list-disc pl-8" >
+                        <h4 className="text-[15px] font-bold">Diver CPC Status</h4>
+                        <ul className="flex flex-col list-disc pl-8 -mt-2" >
                             <li>
                                 <span className="text-sm font-bold mr-1">Driver Name:</span>
                                 <span className="text-sm ml-2">{USER_INFO.cpcStatus.name}</span>
