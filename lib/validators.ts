@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const RegisterSchema = z.object({
-    email: z.string().email(),
+    email: z.email(),
     password: z.string().min(6),
     fullName: z.string().min(1),
     phone: z.string().optional(),
@@ -18,11 +18,8 @@ export const PlateLookupSchema = z.object({
     plate: z.string().min(2), // we'll normalize server-side
 });
 
-export const FaceEnrollSchema = z.object({
-    imageUrl: z.string().url(),  // UploadThing result
-});
-
-export const FaceVerifySchema = z.object({
+// verification accepts either multipart (file) or JSON { imageUrl }
+export const FaceVerifyJsonSchema = z.object({
     imageUrl: z.string().url(),
 });
 

@@ -1,18 +1,30 @@
+// /app/api/face/verify/route.ts
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/db';
 import { getAuthUser } from '@/lib/auth';
-import { FaceVerifySchema } from '@/lib/validators';
+import { FaceVerifyJsonSchema } from '@/lib/validators';
+import { rekognition } from '@/lib/aws';
+import { CompareFacesCommand } from '@aws-sdk/client-rekognition';
+import { fetchUrlToBuffer, fileToBuffer } from '@/lib/image';
 
-function cosineSim(a: number[], b: number[]) {
-    const dot = a.reduce((s, v, i) => s + v * b[i], 0);
-    const na = Math.sqrt(a.reduce((s, v) => s + v * v, 0));
-    const nb = Math.sqrt(b.reduce((s, v) => s + v * v, 0));
-    return dot / (na * nb + 1e-8);
-}
+export const dynamic = 'force-dynamic';  // ensure Node runtime
+export const runtime = 'nodejs';
 
-async function computeEmbeddingFromUrl(_url: string): Promise<number[]> {
-    // TODO: plug your real model
-    return Array.from({ length: 128 }, () => Math.random());
+const SIM_THRESHOLD = Number(process.env.REKOGNITION_SIMILARITY ?? 85); // percent
+
+async function getLiveImageBytes(req: Request): Promise<Buffer> {
+    const ctype = req.headers.get('content-type') || '';
+    if (ctype.includes('multipart/form-data')) {
+        const form = await req.formData();
+        const file = form.get('image');
+        if (!(file instanceof File)) throw new Error('image file is required');
+        return fileToBuffer(file);
+    } else {
+        // JSON with { imageUrl }
+        const body = await req.json();
+        const parsed = FaceVerifyJsonSchema.parse(body);
+        return fetchUrlToBuffer(parsed.imageUrl);
+    }
 }
 
 export async function POST(req: Request) {
@@ -20,20 +32,41 @@ export async function POST(req: Request) {
     if (!auth) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     try {
-        const parsed = FaceVerifySchema.parse(await req.json());
-
-        const { data: face } = await supabase
-            .from('user_face').select('embedding').eq('user_id', auth.userId).eq('is_active', true).maybeSingle();
-
-        if (!face?.embedding) {
-            return NextResponse.json({ verified: false, reason: 'No enrolled face' }, { status: 400 });
+        // 1) Load reference image URL from DB
+        const { data: user, error } = await supabase
+            .from('app_user')
+            .select('photo_url')
+            .eq('id', auth.userId)
+            .single();
+        if (error || !user?.photo_url) {
+            return NextResponse.json({ error: 'No reference photo on file' }, { status: 400 });
         }
 
-        const probe = await computeEmbeddingFromUrl(parsed.imageUrl);
-        const sim = cosineSim(face.embedding as number[], probe);
-        const threshold = 0.7; // adjust after you test your model
+        // 2) Read target (live) bytes and reference bytes into memory
+        const targetBytes = await getLiveImageBytes(req);        // live capture
+        const sourceBytes = await fetchUrlToBuffer(user.photo_url); // registration photo
 
-        return NextResponse.json({ verified: sim >= threshold, score: sim });
+        // 3) Call Rekognition CompareFaces
+        const cmd = new CompareFacesCommand({
+            SourceImage: { Bytes: sourceBytes }, // reference (registration)
+            TargetImage: { Bytes: targetBytes }, // live selfie
+            SimilarityThreshold: SIM_THRESHOLD,  // server-side threshold
+        });
+        const result = await rekognition.send(cmd);
+
+        // 4) Decide pass/fail
+        const best = result.FaceMatches?.[0];
+        const similarity = best?.Similarity ?? 0;
+        const verified = similarity >= SIM_THRESHOLD;
+
+        return NextResponse.json({
+            verified,
+            similarity,                 // % (0..100)
+            threshold: SIM_THRESHOLD,
+            facesFoundInTarget: (result.FaceMatches ?? []).length,
+            // Optional: return bounding boxes if you want UX overlays later
+            // box: best?.Face?.BoundingBox
+        });
     } catch (err: any) {
         return NextResponse.json({ error: err.message ?? 'Bad Request' }, { status: 400 });
     }
