@@ -78,3 +78,20 @@ create index if not exists idx_trip_segment_user_trip on trip_segment(user_id, t
 create index if not exists idx_trip_segment_location on trip_segment(city, town, postcode);
 create index if not exists idx_trip_segment_road on trip_segment(road_type, road_ref);
 create index if not exists idx_trip_segment_time on trip_segment(time_of_day, started_at);
+
+
+-- Duration per segment, derived from trip_segment
+create or replace view v_segment_durations as
+select
+  s.id,
+  s.user_id,
+  s.vehicle_id,
+  s.trip_id,
+  s.city, s.town, s.postcode, s.country,
+  s.road_ref, s.road_type,        -- MOTORWAY | A | B | OTHER
+  s.time_of_day,                  -- DAY | NIGHT
+  s.last_lat, s.last_lng,
+  s.started_at,
+  s.stopped_at,
+  greatest(0, extract(epoch from (coalesce(s.stopped_at, now()) - s.started_at)))::int as seconds
+from trip_segment s;

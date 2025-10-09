@@ -1,38 +1,44 @@
-type GeoResult = {
+// Reverse geocode (best-effort) and simple time-of-day bucket
+export type RevGeo = {
     city?: string | null;
     town?: string | null;
     postcode?: string | null;
     country?: string | null;
-    road?: string | null;   // street name
-    ref?: string | null;    // e.g., M25, A40, B1234
+    road?: string | null; // name
+    ref?: string | null;  // e.g. A406 / M25
 };
 
-export async function reverseGeocode(lat: number, lng: number): Promise<GeoResult> {
-    // Prefer Nominatim (no key); respect usage policy (add a UA)
-    const base = process.env.NOMINATIM_BASE || 'https://nominatim.openstreetmap.org';
-    const url = `${base}/reverse?format=jsonv2&lat=${lat}&lon=${lng}&zoom=17&addressdetails=1&extratags=1&namedetails=1`;
-    const r = await fetch(url, {
-        headers: { 'User-Agent': 'driver-tracker/1.0 (contact@example.com)' }
-    });
-    if (!r.ok) return {};
-    const j = await r.json();
+export async function reverseGeocode(lat: number, lng: number): Promise<RevGeo> {
+    const key = process.env.GOOGLE_MAPS_KEY;
+    if (!key) return {};
+    try {
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${key}`;
+        const r = await fetch(url);
+        const j = await r.json();
+        const res = j?.results?.[0];
+        const comps: any[] = res?.address_components ?? [];
+        const get = (t: string) => comps.find(c => Array.isArray(c.types) && c.types.includes(t))?.long_name;
 
-    const addr = j?.address || {};
-    const ref = j?.extratags?.ref || j?.namedetails?.ref || j?.ref || null;
-    const road = addr?.road ?? addr?.pedestrian ?? j?.name ?? null;
+        // try to infer road name/ref from first result
+        const road = res?.address_components?.find((c: any) => c.types?.includes('route'))?.long_name ?? null;
+        // if route is like "A406", treat as ref; otherwise keep road and try to parse a ref-like token
+        const token = (road || '').toUpperCase().match(/\b([ABM]\d{1,4})\b/)?.[1] || null;
 
-    return {
-        city: addr?.city ?? addr?.village ?? addr?.hamlet ?? addr?.county ?? null,
-        town: addr?.town ?? null,
-        postcode: addr?.postcode ?? null,
-        country: addr?.country ?? null,
-        road,
-        ref,
-    };
+        return {
+            city: get('postal_town') || get('locality') || get('administrative_area_level_2') || null,
+            town: get('postal_town') || null,
+            postcode: get('postal_code') || null,
+            country: get('country') || null,
+            road: road || null,
+            ref: token,
+        };
+    } catch {
+        return {};
+    }
 }
 
-// Simple day/night classifier; improve later with sun times if needed
-export function timeOfDay(date: Date): 'DAY' | 'NIGHT' {
-    const h = date.getUTCHours(); // using UTC. For local, use tz-aware or lat/lng sunrise.
-    return (h >= 6 && h < 18) ? 'DAY' : 'NIGHT';
+export function timeOfDay(at: Date): 'DAY' | 'NIGHT' {
+    // UK-ish heuristic (tweak later with sun times if you want)
+    const h = at.getUTCHours();
+    return (h >= 20 || h < 6) ? 'NIGHT' : 'DAY';
 }
